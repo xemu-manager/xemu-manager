@@ -36,6 +36,12 @@
 - Launch `xemu -dvd_path <iso>` (with `-full-screen` option)
 - Per-game config: copy the global `xemu.toml`, apply overrides, pass `-config_path`
 - Track process state (running / exited), last played, play time
+- Play time per game even when the user swaps discs from the xemu menu, via QMP:
+  - Launch with `-qmp tcp:127.0.0.1:<port>,server,nowait` (xemu forwards unknown args to QEMU)
+  - `query-block` → device `ide0-cd1`, `inserted.file` = current disc; map it to the library by path
+  - `DEVICE_TRAY_MOVED` event (with `timestamp`) marks a disc change; QMP disconnect marks exit
+  - `xemu.toml` is no use here: xemu only saves it on exit, and `-dvd_path` is never written to it
+  - Not verified yet: test by hand with `telnet` that the event fires on a disc swap
 
 ### M5 — Install and update xemu
 - Query GitHub releases of `xemu-project/xemu`
