@@ -4,25 +4,20 @@ using System.Collections.Immutable;
 
 namespace XemuManager.Core.LibraryManager;
 
-public class SearchClient
+public class SearchClient(string libRootPath):ISearchClient
 {
-    private readonly string _libRootPath;
     private static readonly EnumerationOptions ScanOptions = 
         new EnumerationOptions
     {
         RecurseSubdirectories = true,
         MatchCasing = MatchCasing.CaseInsensitive,
     };
-    public SearchClient(string libRootPath)
-    {
-        _libRootPath = libRootPath;
-    }
 
     public IEnumerable<string>? Search(string query, Func<string,bool> predicate)
     {
-        if (!Directory.Exists(_libRootPath))
+        if (!Directory.Exists(libRootPath))
             return null;
-        var gameFilePaths = Directory.EnumerateFiles(_libRootPath, "*", ScanOptions);
+        var gameFilePaths = Directory.EnumerateFiles(libRootPath, "*", ScanOptions);
         gameFilePaths = gameFilePaths.Where(predicate);
         // gameFilePaths = gameFilePaths.Where(p => p.EndsWith(".iso", StringComparison.OrdinalIgnoreCase) || p.EndsWith(".xiso", StringComparison.OrdinalIgnoreCase));
         return gameFilePaths;
