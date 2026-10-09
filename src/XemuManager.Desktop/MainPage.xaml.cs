@@ -1,23 +1,41 @@
-﻿namespace XemuManager.Desktop;
+using XemuManager.Core.LibraryManager;
+using XemuManager.Core.Xemu;
+
+namespace XemuManager.Desktop;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
+	private readonly XemuLauncher _launcher;
 
-	public MainPage()
+	public MainPage(XemuLauncher launcher)
 	{
 		InitializeComponent();
+		_launcher = launcher;
 	}
 
-	private void OnCounterClicked(object? sender, EventArgs e)
+	private void OnLaunchClicked(object? sender, EventArgs e)
 	{
-		count++;
+		var path = GamePathEntry.Text?.Trim().Trim('"');
+		if (string.IsNullOrEmpty(path))
+		{
+			StatusLabel.Text = "Enter the path of a game file.";
+			return;
+		}
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+		try
+		{
+			if (XisoReader.Read(path) is not { } game)
+			{
+				StatusLabel.Text = "This file is not an Xbox game image.";
+				return;
+			}
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
+			_launcher.Launch(game);
+			StatusLabel.Text = $"Started {game.Title} ({game.TitleId}).";
+		}
+		catch (Exception ex)
+		{
+			StatusLabel.Text = ex.Message;
+		}
 	}
 }

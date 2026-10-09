@@ -58,5 +58,6 @@ public static class MauiProgram
 		services.AddTransient<IDownloader, Downloader>();
 		services.AddTransient<XemuInstaller>();
 		services.AddTransient<XemuLauncher>();
+		services.AddTransient<MainPage>();
 	}
 }
