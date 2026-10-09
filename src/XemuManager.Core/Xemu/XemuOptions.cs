@@ -20,9 +20,4 @@ public class XemuReleaseOptions
 {
     public string Owner { get; set; } = "";
     public string Repo { get; set; } = "";
-
-    /// <summary>
-    /// Regex for the asset file name, keyed by platform: "windows-x64", "windows-arm64", "macos".
-    /// </summary>
-    public Dictionary<string, string> AssetPatterns { get; set; } = new();
 }
