@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Derived from the xemu logo (ui/icons/xemu.svg) by Matt Borgerson, xemu project, GPL-2.0-or-later. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 135.46667 135.46667">
+  <circle cx="67.733" cy="67.733" r="63.5" fill="#0f3612" stroke="#81dc8a" stroke-width="0.599"/>
+  <circle cx="67.733" cy="67.733" r="57.286" fill="none" stroke="#81dc8a" stroke-width="2.35"/>
+  <text x="67.733" y="63" text-anchor="middle"
+        font-family="'Ubuntu Mono', 'DejaVu Sans Mono', Consolas, monospace" font-size="36"
+        fill="#81dc8a" stroke="#81dc8a" stroke-width="0.599">xemu</text>
+  <text x="67.733" y="89" text-anchor="middle"
+        font-family="'Ubuntu Mono', 'DejaVu Sans Mono', Consolas, monospace" font-size="24"
+        fill="#81dc8a" stroke="#81dc8a" stroke-width="0.599">manager</text>
+</svg>
